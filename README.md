@@ -2,6 +2,16 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.1.
 
+## Prerequites
+
+1. Node.JS
+2. Angular CLI 7+
+3. Git
+
+## Setting up the environment
+
+Clone the git repository using `git clone https://github.com/hitesh710/conFusion/edit/master/README.md` and in the project run `npm install` command to install all other dependencies
+
 ## Development server
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
