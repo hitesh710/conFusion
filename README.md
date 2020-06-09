@@ -5,7 +5,7 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 ## Prerequites
 
 1. Node.JS
-2. Angular CLI 7+
+2. Angular CLI 9.1.7 or greater
 3. Git
 
 ## Setting up the environment
