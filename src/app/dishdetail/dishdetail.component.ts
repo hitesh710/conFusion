@@ -2,7 +2,6 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { Dish } from '../shared/dish';
 import { switchMap } from 'rxjs/operators';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MatSliderModule } from '@angular/material/slider';
 
 import { DishService } from '../services/dish.service';
 import { Comment } from '../shared/comment';
@@ -63,7 +62,7 @@ export class DishdetailComponent implements OnInit {
         this.commentForm = this.fb.group({
             author: ['', [Validators.required, Validators.minLength(2)]],
             comment: ['', Validators.required],
-            rating: 1
+            rating: [5]
         });
         this.commentForm.valueChanges
             .subscribe(data => this.onValueChanged(data));
@@ -93,16 +92,13 @@ export class DishdetailComponent implements OnInit {
 
     onSubmit() {
         this.comment = this.commentForm.value;
+        let currentDate = new Date().toISOString();
+        this.comment.date = currentDate.toString();
+        this.dish.comments.push(this.comment);
         console.log(this.comment);
-        this.commentForm.reset({
-            author: '',
-            comment: '',
-            rating: 1
-
-        });
+        this.createForm();
         this.commentFormDirective.resetForm();
     }
-
 
     goBack(): void {
         this.location.back();
