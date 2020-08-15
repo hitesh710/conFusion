@@ -18,6 +18,7 @@ import { Location } from '@angular/common';
 export class DishdetailComponent implements OnInit {
 
     dish: Dish;
+    dishcopy: Dish;
     dishIds: string[];
     prev: string;
     next: string;
@@ -52,8 +53,8 @@ export class DishdetailComponent implements OnInit {
     ngOnInit(): void {
         this.dishservice.getDishIds().subscribe(dishIds => this.dishIds = dishIds);
         this.route.params.pipe(switchMap((params: Params) => this.dishservice.getDish(params['id'])))
-            .subscribe(dish => { this.dish = dish; this.setPrevNext(dish.id),
-                errmess => this.errMess = <any>errmess; });
+            .subscribe(dish => { this.dish = dish; this.dishcopy = dish; this.setPrevNext(dish.id)},
+            errmess => this.errMess = <any>errmess);
     }
     setPrevNext(dishId: string) {
         const index = this.dishIds.indexOf(dishId);
@@ -97,7 +98,12 @@ export class DishdetailComponent implements OnInit {
         this.comment = this.commentForm.value;
         let currentDate = new Date().toISOString();
         this.comment.date = currentDate.toString();
-        this.dish.comments.push(this.comment);
+        this.dishcopy.comments.push(this.comment);
+        this.dishservice.putDish(this.dishcopy)
+      .subscribe(dish => {
+        this.dish = dish; this.dishcopy = dish;
+      },
+      errmess => { this.dish = null; this.dishcopy = null; this.errMess = <any>errmess; });
         console.log(this.comment);
         this.createForm();
         this.commentFormDirective.resetForm();
