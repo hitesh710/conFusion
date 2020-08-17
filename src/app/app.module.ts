@@ -24,6 +24,7 @@ import { DishService } from './services/dish.service';
 import { LeaderService } from './services/leader.service';
 import { PromotionService } from './services/promotion.service' ;
 import { ProcessHTTPMsgService } from './services/process-httpmsg.service' ;
+import { FeedbackService } from './services/feedback.service' ;
 
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
@@ -76,7 +77,8 @@ import { HighlightDirective } from './directives/highlight.directive';
   ],
   providers: [DishService, LeaderService ,
   PromotionService, ProcessHTTPMsgService,
-  {provide: 'BaseURL', useValue: baseURL}],
+  {provide: 'BaseURL', useValue: baseURL},
+  FeedbackService],
   bootstrap: [AppComponent],
   entryComponents: [
     LoginComponent
