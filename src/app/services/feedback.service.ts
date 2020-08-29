@@ -12,10 +12,8 @@ import { catchError } from 'rxjs/operators';
 })
 export class FeedbackService {
 
-  private theBoolean: BehaviorSubject<boolean>;
   constructor(private http: HttpClient,
     private processHTTPMsgService: ProcessHTTPMsgService) {
-    this.theBoolean = new BehaviorSubject<boolean>(true);
   }
 
   submitFeedback(feedback: Feedback): Observable<Feedback> {
@@ -26,9 +24,5 @@ export class FeedbackService {
     };
     return this.http.post<Feedback>(baseURL + 'feedback', feedback, httpOptions)
       .pipe(catchError(this.processHTTPMsgService.handleError));
-  }
-
-  updateSubmit(): Observable<boolean> {
-    return this.theBoolean.asObservable();
   }
 }
